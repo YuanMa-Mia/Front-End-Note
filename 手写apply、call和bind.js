@@ -1,5 +1,10 @@
 
 Function.prototype.myCall = function (context) {
+  // 为什么要执行如下判断：依赖 context 是一个对象，避免 this 为 null 或 undefined 时报错
+  // 更完善的实现和考虑：
+  /**
+   * context = context === null || context === undefined ? (thisArgMode === 'strict' ? context : globalThis) : Object(context);
+   */
   context = context || window;
   context.fn = this;
   const arg = [];
